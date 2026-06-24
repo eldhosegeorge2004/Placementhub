@@ -105,7 +105,13 @@ const app = {
 
 const Auth = {
     isSignup: false,
-    users: JSON.parse(localStorage.getItem('placementhub_users')) || {},
+    users: (() => {
+        try {
+            return JSON.parse(localStorage.getItem('placementhub_users')) || {};
+        } catch(e) {
+            return {};
+        }
+    })(),
     currentUser: null,
 
     init() {
@@ -128,6 +134,8 @@ const Auth = {
         this.authSwitchBtn.addEventListener('click', (e) => {
             e.preventDefault();
             this.isSignup = !this.isSignup;
+            document.getElementById('auth-username').value = '';
+            document.getElementById('auth-password').value = '';
             this.updateAuthUI();
         });
 
@@ -158,7 +166,7 @@ const Auth = {
 
     handleAuth(e) {
         e.preventDefault();
-        const userInp = document.getElementById('auth-username').value.trim();
+        const userInp = document.getElementById('auth-username').value.trim().toLowerCase();
         const passInp = document.getElementById('auth-password').value.trim();
 
         if (this.isSignup) {
@@ -187,6 +195,13 @@ const Auth = {
 
     checkApiKey() {
         const userData = this.users[this.currentUser];
+        
+        // Safety check: if user session exists but data is lost, force logout
+        if (!userData) {
+            this.logout();
+            return;
+        }
+
         // If no API key saved for this user
         if (!userData.apikey && !localStorage.getItem('gemini_api_key')) {
             this.apikeyOverlay.style.display = 'flex';
