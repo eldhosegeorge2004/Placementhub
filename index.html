@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlacementHub | Career Intelligence Platform</title>
+    <meta name="description"
+        content="AI-powered placement assistance platform featuring resume building, interview prep, and career roadmaps.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+    <canvas id="webgl-canvas"></canvas>
+
+    <div id="intro-overlay">
+        <div class="intro-logo-container">
+            <div class="intro-logo-shape"></div>
+        </div>
+        <h1 class="intro-title">PlacementHub</h1>
+        <p class="intro-subtitle">ENGINEERING YOUR FUTURE</p>
+        <button id="enter-btn" class="intro-enter-btn">Enter Experience</button>
+    </div>
+
+    <!-- Auth Overlay -->
+    <div id="auth-overlay" style="display: none;">
+        <div class="auth-card glass-panel">
+            <h2 id="auth-title">Welcome Back</h2>
+            <p id="auth-subtitle" class="text-dim" style="margin-bottom: 2rem;">Sign in to continue</p>
+            
+            <form id="auth-form">
+                <div class="form-group">
+                    <label for="auth-username">Username</label>
+                    <input type="text" id="auth-username" required placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" required placeholder="Enter your password">
+                </div>
+                <button type="submit" id="auth-submit-btn" class="btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">
+                <span id="auth-switch-text" class="text-dim">Don't have an account?</span> 
+                <a href="#" id="auth-switch-btn" style="color: var(--primary); text-decoration: none; font-weight: bold;">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- API Key Wizard Overlay -->
+    <div id="apikey-overlay" style="display: none;">
+        <div class="auth-card glass-panel" style="max-width: 500px;">
+            <h2 style="margin-bottom: 1rem;">Unlock AI Features</h2>
+            <p class="text-dim" style="margin-bottom: 2rem;">To use Interview and Quiz modules, you need a free Gemini API Key.</p>
+            
+            <div class="wizard-steps" style="text-align: left; margin-bottom: 2rem;">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <div>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary);">Google AI Studio</a>.</div>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <div>Click "Create API Key" and copy it.</div>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <div>Paste it below to save it securely in your browser.</div>
+                </div>
+            </div>
+
+            <form id="apikey-form">
+                <div class="form-group">
+                    <input type="password" id="apikey-input" required placeholder="AIzaSy...">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Save API Key & Enter App</button>
+            </form>
+            <button id="skip-apikey-btn" class="btn-glass" style="width: 100%; margin-top: 1rem;">Skip for now</button>
+        </div>
+    </div>
+
+    <div id="app">
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="logo-spinner"></div>
+                </div>
+                <div class="logo-text">PlacementHub <span class="beta-tag">PRO</span></div>
+            </div>
+            <nav>
+                <button class="nav-item active" data-module="dashboard">
+                    <img src="/src/assets/icons/home.png" class="nav-icon" alt="Home">
+                    <span>Home</span>
+                </button>
+                <button class="nav-item" data-module="roadmap">
+                    <img src="/src/assets/icons/roadmap.png" class="nav-icon" alt="Roadmap">
+                    <span>Roadmap</span>
+                </button>
+                <button class="nav-item" data-module="resume">
+                    <img src="/src/assets/icons/resume.png" class="nav-icon" alt="Resume">
+                    <span>Resume Builder</span>
+                </button>
+                <button class="nav-item" data-module="club">
+                    <img src="/src/assets/icons/club.png" class="nav-icon" alt="Club">
+                    <span>Coding Club</span>
+                </button>
+                <button class="nav-item" data-module="interview">
+                    <img src="/src/assets/icons/interview.png" class="nav-icon" alt="Interview">
+                    <span>AI Interview</span>
+                </button>
+                <button class="nav-item" data-module="quiz">
+                    <img src="/src/assets/icons/quiz.png" class="nav-icon" alt="Quiz">
+                    <span>Skill Quiz</span>
+                </button>
+                <button class="nav-item" data-module="typing">
+                    <img src="/src/assets/icons/typing.png" class="nav-icon" alt="Typing">
+                    <span>Typing Test</span>
+                </button>
+                <button class="nav-item" data-module="aptitude">
+                    <img src="/src/assets/icons/aptitude.png" class="nav-icon" alt="Aptitude">
+                    <span>Aptitude</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="sidebar-avatar">--</div>
+                    <div class="user-info">
+                        <p class="name" id="sidebar-username">Guest</p>
+                        <p class="status">Candidate</p>
+                    </div>
+                </div>
+                <button id="logout-btn" class="btn-glass" style="width: 100%; margin-top: 1rem; padding: 0.5rem; font-size: 0.85rem;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header id="main-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="mobile-menu-btn" class="btn-glass icon-only" style="display: none; padding: 0.5rem; width: 40px; height: 40px;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="module-title">Dashboard</h1>
+                        <p class="header-subtitle" id="header-subtitle-text">Your personalized placement command center</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="window.location.reload()"><i class="fas fa-sync-alt"></i> Refresh App</button>
+                </div>
+            </header>
+
+            <section id="module-container">
+                <!-- Modules injected here -->
+            </section>
+        </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
