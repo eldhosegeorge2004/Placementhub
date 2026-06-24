@@ -7,6 +7,7 @@ import { TypingModule } from './modules/typing/typing.js';
 import { ClubModule } from './modules/club/club.js';
 import { AptitudeModule } from './modules/aptitude/aptitude.js';
 import { initBackground } from './background.js';
+import { supabase } from './supabaseClient.js';
 import './style.css';
 import './intro.css'; // Import Intro Styles
 
@@ -105,18 +106,9 @@ const app = {
 
 const Auth = {
     isSignup: false,
-    users: (() => {
-        try {
-            return JSON.parse(localStorage.getItem('placementhub_users')) || {};
-        } catch(e) {
-            return {};
-        }
-    })(),
     currentUser: null,
 
     init() {
-        this.currentUser = localStorage.getItem('placementhub_current_user');
-        
         // Element refs
         this.authOverlay = document.getElementById('auth-overlay');
         this.apikeyOverlay = document.getElementById('apikey-overlay');
@@ -164,50 +156,46 @@ const Auth = {
         }
     },
 
-    handleAuth(e) {
+    async handleAuth(e) {
         e.preventDefault();
         const userInp = document.getElementById('auth-username').value.trim().toLowerCase();
         const passInp = document.getElementById('auth-password').value.trim();
 
-        if (this.isSignup) {
-            if (this.users[userInp]) {
-                alert("Username already exists!");
-                return;
-            }
-            this.users[userInp] = { password: passInp, apikey: null };
-            localStorage.setItem('placementhub_users', JSON.stringify(this.users));
-            this.loginSuccess(userInp);
-        } else {
-            if (this.users[userInp] && this.users[userInp].password === passInp) {
+        // Convert username to a dummy email for Supabase Auth if it's not already an email
+        const email = userInp.includes('@') ? userInp : `${userInp}@placementhub.local`;
+
+        try {
+            if (this.isSignup) {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: passInp,
+                });
+                if (error) throw error;
                 this.loginSuccess(userInp);
             } else {
-                alert("Invalid credentials!");
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: passInp,
+                });
+                if (error) throw error;
+                this.loginSuccess(userInp);
             }
+        } catch (error) {
+            alert(`Authentication Error: ${error.message}`);
         }
     },
 
     loginSuccess(username) {
         this.currentUser = username;
-        localStorage.setItem('placementhub_current_user', username);
         this.authOverlay.style.display = 'none';
         this.checkApiKey();
     },
 
     checkApiKey() {
-        const userData = this.users[this.currentUser];
-        
-        // Safety check: if user session exists but data is lost, force logout
-        if (!userData) {
-            this.logout();
-            return;
-        }
-
-        // If no API key saved for this user
-        if (!userData.apikey && !localStorage.getItem('gemini_api_key')) {
+        // If no global Gemini API key is saved locally
+        if (!localStorage.getItem('gemini_api_key')) {
             this.apikeyOverlay.style.display = 'flex';
         } else {
-            // Restore legacy global storage so other modules just work seamlessly
-            if (userData.apikey) localStorage.setItem('gemini_api_key', userData.apikey);
             this.enterApp();
         }
     },
@@ -216,8 +204,6 @@ const Auth = {
         e.preventDefault();
         const key = document.getElementById('apikey-input').value.trim();
         if (key) {
-            this.users[this.currentUser].apikey = key;
-            localStorage.setItem('placementhub_users', JSON.stringify(this.users));
             localStorage.setItem('gemini_api_key', key);
             this.apikeyOverlay.style.display = 'none';
             this.enterApp();
@@ -231,8 +217,15 @@ const Auth = {
         // Update sidebar
         const sidebarName = document.getElementById('sidebar-username');
         const sidebarAvatar = document.getElementById('sidebar-avatar');
-        if(sidebarName) sidebarName.innerText = this.currentUser;
-        if(sidebarAvatar) sidebarAvatar.innerText = this.currentUser.substring(0, 2).toUpperCase();
+        
+        // Extract original username if it's our dummy email
+        let displayUser = this.currentUser || 'Guest';
+        if (displayUser.endsWith('@placementhub.local')) {
+            displayUser = displayUser.split('@')[0];
+        }
+
+        if(sidebarName) sidebarName.innerText = displayUser;
+        if(sidebarAvatar) sidebarAvatar.innerText = displayUser.substring(0, 2).toUpperCase();
         
         // Initialize app content if not already done
         if(!window.appInitialized) {
@@ -241,8 +234,8 @@ const Auth = {
         }
     },
 
-    logout() {
-        localStorage.removeItem('placementhub_current_user');
+    async logout() {
+        await supabase.auth.signOut();
         localStorage.removeItem('gemini_api_key'); // clear global so next user uses their own
         this.currentUser = null;
         
@@ -250,8 +243,10 @@ const Auth = {
         window.location.reload();
     },
 
-    checkSession() {
-        if (this.currentUser) {
+    async checkSession() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+            this.currentUser = session.user.email;
             this.checkApiKey();
         } else {
             this.authOverlay.style.display = 'flex';
