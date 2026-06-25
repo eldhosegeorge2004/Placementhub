@@ -161,7 +161,7 @@ export const RoadmapModule = {
         const container = document.getElementById('roadmap-phases');
         container.innerHTML = RoadmapModule.phases.map((phase, idx) => `
             <div class="phase-card card" style="position: relative; margin-bottom: 3rem; border-left: 4px solid ${idx % 2 === 0 ? 'var(--primary)' : 'var(--secondary)'}">
-                <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                <div class="phase-card-content">
                     <div class="phase-icon">
                         ${phase.icon}
                     </div>
