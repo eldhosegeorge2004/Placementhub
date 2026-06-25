@@ -390,7 +390,9 @@ export const InterviewModule = {
             </div>
         \`;
         chat.insertAdjacentHTML('beforeend', loadingHtml);
-        chat.scrollTop = chat.scrollHeight;
+        setTimeout(() => {
+            chat.scrollTop = chat.scrollHeight;
+        }, 50);
 
         try {
             const genAI = new GoogleGenerativeAI(InterviewModule.apiKey);
@@ -442,7 +444,9 @@ export const InterviewModule = {
         `;
 
         chat.insertAdjacentHTML('beforeend', html);
-        chat.scrollTop = chat.scrollHeight;
+        setTimeout(() => {
+            chat.scrollTop = chat.scrollHeight;
+        }, 50);
     },
 
     endSession: () => {
