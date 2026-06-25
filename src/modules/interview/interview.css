@@ -231,11 +231,11 @@
 @media (max-width: 900px) {
     .interview-workspace { grid-template-columns: 1fr; }
     .interview-avatar-area { height: 250px; width: 250px; }
-    .interview-chat { height: 350px; }
+    .interview-chat { height: auto; overflow: visible; max-height: none; }
 }
 @media (max-width: 480px) {
     .interview-avatar-area { height: 200px; width: 200px; }
-    .interview-chat { height: 300px; padding: 1rem; }
+    .interview-chat { height: auto; overflow: visible; padding: 1rem; max-height: none; }
     .input-controls { flex-direction: column; align-items: stretch; }
     .mic-btn { right: auto; bottom: auto; position: relative; margin-top: 1rem; width: 100%; border-radius: 12px; }
     #user-response { padding-right: 1.2rem; }
