@@ -330,6 +330,7 @@ nav {
 
 #main-header {
     height: 110px;
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -363,6 +364,7 @@ nav {
 
 #module-container {
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
