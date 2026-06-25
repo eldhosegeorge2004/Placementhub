@@ -611,6 +611,10 @@ h3 {
     display: none;
 }
 
+#mobile-menu-btn {
+    flex-shrink: 0; /* Prevent the menu button from disappearing if title is long */
+}
+
 @media (max-width: 900px) {
     #mobile-menu-btn {
         display: flex !important;
@@ -644,6 +648,14 @@ h3 {
         align-items: flex-start;
         gap: 1rem;
         margin-top: 0;
+        width: 100%;
+    }
+    
+    #main-header > div:first-child {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     .header-actions {
@@ -666,9 +678,15 @@ h3 {
 
 @media (max-width: 480px) {
     .auth-card { padding: 1.5rem; }
-    #module-title { font-size: 1.5rem; }
+    #module-title { font-size: 1.5rem; word-break: break-word; }
     #main-header { padding: 1rem; }
     #module-container { padding: 1rem 1rem 4rem; }
     .btn-primary { padding: 0.75rem 1.2rem; font-size: 0.9rem; width: 100%; justify-content: center; }
     .wizard-steps .step { flex-direction: column; gap: 0.5rem; }
+    
+    /* Aptitude Specific Mobile Fixes */
+    #aptitude-test .card { padding: 1.5rem !important; }
+    #aptitude-category { position: static !important; display: inline-block; margin-bottom: 1rem; }
+    #aptitude-question-text { font-size: 1.1rem !important; }
+    #aptitude-options button { padding: 0.8rem 1rem !important; font-size: 0.95rem !important; white-space: normal; }
 }
