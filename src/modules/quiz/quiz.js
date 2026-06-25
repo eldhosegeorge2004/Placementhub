@@ -192,11 +192,13 @@ export const QuizModule = {
                 <h3 class="question-text">${q.question}</h3>
                 
                 <div class="options-grid">
-                    ${q.options.map((opt, idx) => `
+                    ${q.options.map((opt, idx) => {
+                        const safeOpt = String(opt || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+                        return `
                         <button class="option-btn" onclick="QuizModule.checkAnswer(${idx}, this)">
-                            <span style="opacity: 0.5; margin-right: 10px;">${String.fromCharCode(65 + idx)}.</span> ${opt}
+                            <span style="opacity: 0.5; margin-right: 10px;">${String.fromCharCode(65 + idx)}.</span> ${safeOpt}
                         </button>
-                    `).join('')}
+                    `}).join('')}
                 </div>
 
                 <div id="explanation-box" class="explanation-box" style="display: none;">
@@ -221,12 +223,19 @@ export const QuizModule = {
             b.style.cursor = 'default';
         });
 
-        if (idx === q.correctIndex) {
+        let safeCorrectIndex = Number(q.correctIndex);
+        if (isNaN(safeCorrectIndex) || safeCorrectIndex < 0 || safeCorrectIndex >= buttons.length) {
+            safeCorrectIndex = 0; // Fallback to avoid crashing
+        }
+
+        if (idx === safeCorrectIndex) {
             btn.classList.add('correct');
             QuizModule.score++;
         } else {
             btn.classList.add('wrong');
-            buttons[q.correctIndex].classList.add('correct');
+            if (buttons[safeCorrectIndex]) {
+                buttons[safeCorrectIndex].classList.add('correct');
+            }
         }
 
         document.getElementById('explanation-box').style.display = 'block';
@@ -264,8 +273,8 @@ export const QuizModule = {
                     <button class="btn-primary" onclick="QuizModule.render(document.querySelector('#module-container'))">
                         Try Another Topic
                     </button>
-                    <button class="btn-outline" onclick="document.querySelector('.nav-item[data-module=\\'dashboard\\']').click()">
-                        Return Dashboard
+                    <button class="btn-glass" style="border: 1px solid var(--glass-border); padding: 0.8rem 2rem; color: var(--text-dim); transition: 0.3s;" onclick="document.querySelector('.nav-item[data-module=\\'dashboard\\']').click()" onmouseover="this.style.color='#fff'; this.style.borderColor='var(--primary)';" onmouseout="this.style.color='var(--text-dim)'; this.style.borderColor='var(--glass-border)';">
+                        <i class="fas fa-home" style="margin-right: 8px;"></i> Return to Dashboard
                     </button>
                 </div>
             </div>
