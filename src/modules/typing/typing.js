@@ -8,21 +8,21 @@ export const TypingModule = {
                 </header>
 
                 <div class="typing-stats" style="margin-bottom: 2rem;">
-                    <div class="card" style="text-align: center; padding: 1.5rem;">
-                        <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">WPM</span>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary);" id="wpm">0</div>
+                    <div class="stat-card card">
+                        <span class="stat-title">WPM</span>
+                        <div class="stat-value" id="wpm" style="color: var(--primary);">0</div>
                     </div>
-                    <div class="card" style="text-align: center; padding: 1.5rem;">
-                        <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Accuracy</span>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--secondary);" id="accuracy">100%</div>
+                    <div class="stat-card card">
+                        <span class="stat-title">Accuracy</span>
+                        <div class="stat-value" id="accuracy" style="color: var(--secondary);">100%</div>
                     </div>
-                    <div class="card" style="text-align: center; padding: 1.5rem;">
-                        <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Time</span>
-                        <div style="font-size: 2rem; font-weight: 800; color: #fff;" id="timer">60s</div>
+                    <div class="stat-card card">
+                        <span class="stat-title">Time</span>
+                        <div class="stat-value" id="timer" style="color: #fff;">60s</div>
                     </div>
-                    <div class="card" style="text-align: center; padding: 1.5rem;">
-                        <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Best</span>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);" id="top-score">-</div>
+                    <div class="stat-card card">
+                        <span class="stat-title">Best</span>
+                        <div class="stat-value" id="top-score" style="color: var(--accent);">-</div>
                     </div>
                 </div>
                 
@@ -34,7 +34,7 @@ export const TypingModule = {
                         style="position: absolute; opacity: 0; pointer-events: none;">
                 </div>
                 
-                <div class="typing-actions-wrapper" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div class="typing-actions-wrapper" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2.5rem;">
                     <button class="btn-primary restart-btn" id="restart-btn">Try Again</button>
                     <p style="color: var(--text-dim); font-size: 0.9rem;">
                         <span style="color: var(--primary);">Tip:</span> Click the box and start typing. Press <kbd style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px;">TAB</kbd> to reset.

@@ -363,7 +363,23 @@ export const InterviewModule = {
         // Add loading bubble
         const chat = document.querySelector('.interview-chat');
         const loadingId = 'loading-' + Date.now();
-        chat.innerHTML += `<div id="${loadingId}" class="ai-msg card" style="background: rgba(59,130,246,0.1); width: fit-content; padding: 0.5rem 1rem;">Thinking...</div>`;
+        const loadingHtml = \`
+            <div id="\${loadingId}" class="msg-card ai" style="
+                background: rgba(59, 130, 246, 0.1);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                padding: 1rem;
+                border-radius: 16px;
+                max-width: 85%;
+                align-self: flex-start;
+                border-bottom-left-radius: 2px;
+                animation: fadeIn 0.3s ease;
+                color: var(--primary);
+                font-style: italic;
+            ">
+                Thinking...
+            </div>
+        \`;
+        chat.insertAdjacentHTML('beforeend', loadingHtml);
         chat.scrollTop = chat.scrollHeight;
 
         try {
