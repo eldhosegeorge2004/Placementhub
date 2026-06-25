@@ -376,6 +376,7 @@ export const InterviewModule = {
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                margin-bottom: 1rem;
             ">
                 <style>
                     @keyframes typingDot {
@@ -391,8 +392,10 @@ export const InterviewModule = {
         \`;
         chat.insertAdjacentHTML('beforeend', loadingHtml);
         setTimeout(() => {
-            chat.scrollTop = chat.scrollHeight;
-        }, 50);
+            chat.scrollTop = chat.scrollHeight + 100; // Over-scroll to guarantee visibility
+            const bubble = document.getElementById(loadingId);
+            if (bubble) bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 150);
 
         try {
             const genAI = new GoogleGenerativeAI(InterviewModule.apiKey);
@@ -445,8 +448,8 @@ export const InterviewModule = {
 
         chat.insertAdjacentHTML('beforeend', html);
         setTimeout(() => {
-            chat.scrollTop = chat.scrollHeight;
-        }, 50);
+            chat.scrollTop = chat.scrollHeight + 100;
+        }, 150);
     },
 
     endSession: () => {
