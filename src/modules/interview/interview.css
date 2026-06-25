@@ -87,6 +87,10 @@
     scrollbar-color: var(--glass-border) transparent;
 }
 
+.msg-card {
+    flex-shrink: 0;
+}
+
 /* Input Area */
 .input-controls {
     display: flex;
