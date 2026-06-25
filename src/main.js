@@ -57,6 +57,7 @@ const app = {
         const sidebar = document.querySelector('.sidebar');
         const overlay = document.getElementById('mobile-overlay');
         const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('mobile-close-btn');
 
         const toggleSidebar = () => {
             if(sidebar) sidebar.classList.toggle('sidebar-open');
@@ -70,6 +71,7 @@ const app = {
 
         if(menuBtn) menuBtn.addEventListener('click', toggleSidebar);
         if(overlay) overlay.addEventListener('click', closeSidebar);
+        if(closeBtn) closeBtn.addEventListener('click', closeSidebar);
 
         this.navItems.forEach(item => {
             item.addEventListener('click', () => {
