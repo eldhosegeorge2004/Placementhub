@@ -209,7 +209,11 @@
     font-weight: 800;
 }
 @media (max-width: 900px) {
-    .typing-stats { flex-direction: column; gap: 1rem; }
+    .typing-stats { 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem; 
+    }
     .text-display { font-size: 1.2rem; }
     .typing-area { padding: 2rem; }
     .restart-btn { padding: 0.8rem 2rem; font-size: 0.95rem; }
@@ -224,4 +228,18 @@
     .typing-actions button { width: 100%; }
     .restart-btn { padding: 0.7rem 1.5rem; font-size: 0.85rem; width: 100%; }
     .typing-controls { flex-direction: column; gap: 1rem; }
+    
+    .typing-stats {
+        grid-template-columns: 1fr 1fr; /* Keep 2x2 grid */
+        gap: 0.5rem;
+    }
+    .stat-card {
+        padding: 1rem;
+    }
+    .stat-value {
+        font-size: 1.8rem;
+    }
+    .stat-title {
+        font-size: 0.65rem;
+    }
 }
