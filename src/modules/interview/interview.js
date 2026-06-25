@@ -393,8 +393,6 @@ export const InterviewModule = {
         chat.insertAdjacentHTML('beforeend', loadingHtml);
         setTimeout(() => {
             chat.scrollTop = chat.scrollHeight + 100; // Over-scroll to guarantee visibility
-            const bubble = document.getElementById(loadingId);
-            if (bubble) bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 150);
 
         try {
