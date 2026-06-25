@@ -162,7 +162,8 @@ const Auth = {
         const passInp = document.getElementById('auth-password').value.trim();
 
         // Convert username to a dummy email for Supabase Auth if it's not already an email
-        const email = userInp.includes('@') ? userInp : `${userInp}@placementhub.local`;
+        const safeUser = userInp.replace(/[^a-z0-9]/g, '');
+        const email = userInp.includes('@') ? userInp : `${safeUser}@placementhub.com`;
 
         try {
             if (this.isSignup) {
