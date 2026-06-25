@@ -365,18 +365,28 @@ export const InterviewModule = {
         const loadingId = 'loading-' + Date.now();
         const loadingHtml = \`
             <div id="\${loadingId}" class="msg-card ai" style="
-                background: rgba(59, 130, 246, 0.1);
-                border: 1px solid rgba(59, 130, 246, 0.2);
-                padding: 1rem;
+                background: rgba(59, 130, 246, 0.15);
+                border: 1px solid rgba(59, 130, 246, 0.3);
+                padding: 1rem 1.5rem;
                 border-radius: 16px;
                 max-width: 85%;
                 align-self: flex-start;
                 border-bottom-left-radius: 2px;
                 animation: fadeIn 0.3s ease;
-                color: var(--primary);
-                font-style: italic;
+                display: flex;
+                align-items: center;
+                gap: 8px;
             ">
-                Thinking...
+                <style>
+                    @keyframes typingDot {
+                        0%, 100% { transform: translateY(0); opacity: 0.5; }
+                        50% { transform: translateY(-4px); opacity: 1; }
+                    }
+                </style>
+                <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both;"></span>
+                <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.2s;"></span>
+                <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.4s;"></span>
+                <span style="color: #60a5fa; font-size: 0.9rem; margin-left: 8px; font-weight: 500;">AI is analyzing...</span>
             </div>
         \`;
         chat.insertAdjacentHTML('beforeend', loadingHtml);
