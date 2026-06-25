@@ -171,6 +171,13 @@ const Auth = {
                     password: passInp,
                 });
                 if (error) throw error;
+                
+                // If email confirmations are enabled in Supabase, session will be null
+                if (!data.session) {
+                    alert("Sign up successful! However, your session is null. You MUST disable 'Confirm email' in your Supabase Auth Settings to log in automatically.");
+                    return;
+                }
+                
                 this.loginSuccess(userInp);
             } else {
                 const { data, error } = await supabase.auth.signInWithPassword({

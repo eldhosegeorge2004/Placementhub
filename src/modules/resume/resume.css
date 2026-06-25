@@ -853,5 +853,15 @@
     color: #000;
 }
 
+@media (max-width: 900px) {
+    .resume-layout { grid-template-columns: 1fr; height: auto; }
+    .resume-builder { border-right: none; border-bottom: 1px solid var(--glass-border); padding-right: 0; padding-bottom: 2rem; margin-bottom: 2rem; height: auto; overflow: visible; }
+    .resume-preview { height: auto; }
+}
 
-@media (max-width: 900px) { .resume-layout { grid-template-columns: 1fr; } .resume-builder { border-right: none; border-bottom: 1px solid var(--glass-border); padding-right: 0; padding-bottom: 2rem; margin-bottom: 2rem; } }
+@media (max-width: 480px) {
+    .resume-layout { padding: 1rem; }
+    .form-group input, .form-group textarea { font-size: 0.9rem; padding: 0.8rem; }
+    .resume-actions { flex-direction: column; }
+    .resume-actions button { width: 100%; }
+}

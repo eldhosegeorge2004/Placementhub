@@ -648,3 +648,12 @@ h3 {
         display: none;
     }
 }
+
+@media (max-width: 480px) {
+    .auth-card { padding: 1.5rem; }
+    #module-title { font-size: 1.5rem; }
+    #main-header { padding: 1rem; }
+    #module-container { padding: 1rem 1rem 4rem; }
+    .btn-primary { padding: 0.75rem 1.2rem; font-size: 0.9rem; width: 100%; justify-content: center; }
+    .wizard-steps .step { flex-direction: column; gap: 0.5rem; }
+}
