@@ -84,7 +84,19 @@
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
-    scrollbar-color: var(--glass-border) transparent;
+    scrollbar-color: var(--primary) rgba(0,0,0,0.2);
+}
+
+.interview-chat::-webkit-scrollbar {
+    width: 8px;
+}
+.interview-chat::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+.interview-chat::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
 }
 
 .msg-card {
