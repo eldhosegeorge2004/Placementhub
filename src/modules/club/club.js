@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const ClubModule = {
     selectedLanguage: 'JavaScript',
-    apiKey: import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key'),
+    get apiKey() { return import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key'); }, set apiKey(val) {},
 
     // Data-driven problem list
     problems: [

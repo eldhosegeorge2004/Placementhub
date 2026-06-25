@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const QuizModule = {
-    apiKey: import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key'),
+    get apiKey() { return import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key'); }, set apiKey(val) {},
     questions: [],
     currentQuestionIndex: 0,
     score: 0,
