@@ -50,9 +50,6 @@ export const RoadmapModule = {
                     <div id="roadmap-phases" class="roadmap-flow"></div>
                     
                     <div style="text-align: center; margin-top: 3rem; display: flex; gap: 1rem; justify-content: center;">
-                        <button class="btn-primary" onclick="window.print()">
-                            <i class="fas fa-print"></i> Print Roadmap
-                        </button>
                         <button class="btn-glass" style="color: #ef4444; border-color: rgba(239,68,68,0.3);" onclick="RoadmapModule.resetRoadmap()">
                             <i class="fas fa-trash-alt"></i> Discard & Create New
                         </button>
