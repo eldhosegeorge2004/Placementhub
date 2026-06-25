@@ -605,10 +605,6 @@ h3 {
 
 #mobile-close-btn {
     display: none;
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 10;
 }
 
 @media (max-width: 900px) {

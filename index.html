@@ -82,14 +82,16 @@
     <div id="app">
         <div id="mobile-overlay" class="mobile-overlay"></div>
         <aside class="sidebar">
-            <button id="mobile-close-btn" class="btn-glass icon-only" aria-label="Close menu">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="logo">
-                <div class="logo-icon">
-                    <div class="logo-spinner"></div>
+            <div class="sidebar-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem;">
+                <div class="logo" style="margin-bottom: 0;">
+                    <div class="logo-icon">
+                        <div class="logo-spinner"></div>
+                    </div>
+                    <div class="logo-text">PlacementHub <span class="beta-tag">PRO</span></div>
                 </div>
-                <div class="logo-text">PlacementHub <span class="beta-tag">PRO</span></div>
+                <button id="mobile-close-btn" class="btn-glass icon-only" aria-label="Close menu">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
             </div>
             <nav>
                 <button class="nav-item active" data-module="dashboard">
