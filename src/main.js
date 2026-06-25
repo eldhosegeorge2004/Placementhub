@@ -244,7 +244,6 @@ const Auth = {
 
     async logout() {
         await supabase.auth.signOut();
-        localStorage.removeItem('gemini_api_key'); // clear global so next user uses their own
         this.currentUser = null;
         
         // Perform a hard reload to securely reset all SPA states and return to the intro screen
