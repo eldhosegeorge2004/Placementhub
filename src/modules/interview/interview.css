@@ -78,7 +78,7 @@
 /* Chat Area */
 .interview-chat {
     height: 400px;
-    overflow-y: auto;
+    overflow-y: auto !important;
     margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -243,11 +243,11 @@
 @media (max-width: 900px) {
     .interview-workspace { grid-template-columns: 1fr; }
     .interview-avatar-area { height: 250px; width: 250px; }
-    .interview-chat { height: 350px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .interview-chat { height: 350px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
 }
 @media (max-width: 480px) {
     .interview-avatar-area { height: 200px; width: 200px; }
-    .interview-chat { height: 300px; padding: 1rem; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .interview-chat { height: 300px; padding: 1rem; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
     .input-controls { flex-direction: column; align-items: stretch; }
     .mic-btn { right: auto; bottom: auto; position: relative; margin-top: 1rem; width: 100%; border-radius: 12px; }
     #user-response { padding-right: 1.2rem; }
