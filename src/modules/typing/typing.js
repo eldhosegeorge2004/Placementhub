@@ -7,7 +7,7 @@ export const TypingModule = {
                     <p style="color: var(--text-muted);">Benchmark your documentation speed for technical roles.</p>
                 </header>
 
-                <div class="typing-stats" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                <div class="typing-stats" style="margin-bottom: 2rem;">
                     <div class="card" style="text-align: center; padding: 1.5rem;">
                         <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">WPM</span>
                         <div style="font-size: 2rem; font-weight: 800; color: var(--primary);" id="wpm">0</div>
@@ -34,8 +34,8 @@ export const TypingModule = {
                         style="position: absolute; opacity: 0; pointer-events: none;">
                 </div>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <button class="btn-primary" id="restart-btn" style="padding: 1rem 3rem;">Try Again</button>
+                <div class="typing-actions-wrapper" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <button class="btn-primary restart-btn" id="restart-btn">Try Again</button>
                     <p style="color: var(--text-dim); font-size: 0.9rem;">
                         <span style="color: var(--primary);">Tip:</span> Click the box and start typing. Press <kbd style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px;">TAB</kbd> to reset.
                     </p>
