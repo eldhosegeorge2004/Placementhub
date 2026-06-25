@@ -305,8 +305,16 @@ export const AptitudeModule = {
             explanationText.innerText = q.explanation;
             explanationBox.style.display = 'block';
             
-            // Scroll to explanation
-            setTimeout(() => explanationBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+            // Safely scroll the container instead of using scrollIntoView which shifts the viewport
+            setTimeout(() => {
+                const container = document.getElementById('module-container');
+                if(container) {
+                    container.scrollTo({
+                        top: container.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
         }
 
         document.getElementById('btn-next-aptitude').style.display = 'inline-block';
