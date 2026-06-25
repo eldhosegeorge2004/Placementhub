@@ -266,16 +266,27 @@
     }
 }
 @media (max-width: 900px) {
-    .roadmap-stats { flex-direction: column; gap: 1rem; }
+    .roadmap-stats { flex-direction: column !important; gap: 1rem !important; padding: 1.5rem !important; }
     .roadmap-flow { padding-left: 1rem; }
     .phase-card { padding: 1.5rem; }
     .phase-card-content { flex-direction: column; gap: 1rem; }
-    .phase-card-content > div:last-child { width: 100%; word-break: break-word; }
+    .phase-card-content > div:last-child { width: 100%; word-break: break-word; overflow-wrap: break-word; }
+    .section-header h2 { font-size: 2.2rem !important; }
+    .roadmap-container * {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
 }
 @media (max-width: 480px) {
+    .roadmap-container { padding: 1rem; }
     .roadmap-setup { padding: 1.5rem; }
     .btn-generate { padding: 0.8rem 2rem; font-size: 1rem; width: 100%; }
     .phase-card { padding: 1rem; }
     .phase-icon { width: 50px; height: 50px; font-size: 1.5rem; }
     .timeline { padding: 0; }
+    .section-header h2 { font-size: 1.8rem !important; }
+    .roadmap-setup h3 { font-size: 1.4rem !important; }
+    .roadmap-setup > div:first-child { font-size: 3rem !important; margin-bottom: 0.5rem !important; }
+    .task-list { grid-template-columns: 1fr !important; }
+    .stat-item span:first-child { font-size: 1.5rem !important; }
 }
