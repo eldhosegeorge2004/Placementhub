@@ -363,8 +363,8 @@ export const InterviewModule = {
         // Add loading bubble
         const chat = document.querySelector('.interview-chat');
         const loadingId = 'loading-' + Date.now();
-        const loadingHtml = \`
-            <div id="\${loadingId}" class="msg-card ai" style="
+        const loadingHtml = `
+            <div id="${loadingId}" class="msg-card ai" style="
                 background: rgba(59, 130, 246, 0.15);
                 border: 1px solid rgba(59, 130, 246, 0.3);
                 padding: 1rem 1.5rem;
@@ -389,11 +389,14 @@ export const InterviewModule = {
                 <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.4s;"></span>
                 <span style="color: #60a5fa; font-size: 0.9rem; margin-left: 8px; font-weight: 500;">AI is analyzing...</span>
             </div>
-        \`;
+        `;
         chat.insertAdjacentHTML('beforeend', loadingHtml);
         setTimeout(() => {
-            chat.scrollTop = chat.scrollHeight + 100; // Over-scroll to guarantee visibility
-        }, 150);
+            const loadingEl = document.getElementById(loadingId);
+            if (loadingEl) {
+                loadingEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+        }, 50);
 
         try {
             const genAI = new GoogleGenerativeAI(InterviewModule.apiKey);
@@ -418,7 +421,13 @@ export const InterviewModule = {
             InterviewModule.history.push({ role: 'model', parts: [{ text: aiText }] });
 
         } catch (error) {
-            document.getElementById(loadingId).innerText = "Error...";
+            console.error("AI Interview Error:", error);
+            const loadingEl = document.getElementById(loadingId);
+            if (loadingEl) {
+                loadingEl.innerHTML = `<span style="color: #ef4444; font-weight: 500;"><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>Error: ${error.message || 'Failed to connect. Please try again.'}</span>`;
+                loadingEl.style.background = 'rgba(239, 68, 68, 0.1)';
+                loadingEl.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+            }
         }
     },
 
@@ -446,8 +455,11 @@ export const InterviewModule = {
 
         chat.insertAdjacentHTML('beforeend', html);
         setTimeout(() => {
-            chat.scrollTop = chat.scrollHeight + 100;
-        }, 150);
+            const newCard = chat.lastElementChild;
+            if (newCard) {
+                newCard.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+        }, 50);
     },
 
     endSession: () => {
