@@ -20,7 +20,7 @@
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -2.6rem;
+    left: calc(-2rem - 15px);
     top: 0.5rem;
     width: 20px;
     height: 20px;
@@ -218,7 +218,7 @@
     }
     .timeline-card { padding: 1.5rem; }
     .timeline-item::before {
-        left: -2.6rem; /* Keep the same offset relative to timeline */
+        left: calc(-2rem - 15px); /* Keep the same offset relative to timeline */
     }
     .language-tabs {
         justify-content: center; /* Center the stacked buttons */
