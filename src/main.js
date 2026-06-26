@@ -121,7 +121,6 @@ const Auth = {
         this.authSwitchBtn = document.getElementById('auth-switch-btn');
         this.authSwitchText = document.getElementById('auth-switch-text');
         this.apikeyForm = document.getElementById('apikey-form');
-        this.skipApikeyBtn = document.getElementById('skip-apikey-btn');
         this.logoutBtn = document.getElementById('logout-btn');
 
         // Bind events
@@ -135,7 +134,6 @@ const Auth = {
 
         this.authForm.addEventListener('submit', (e) => this.handleAuth(e));
         this.apikeyForm.addEventListener('submit', (e) => this.handleApiKey(e));
-        this.skipApikeyBtn.addEventListener('click', () => this.enterApp());
         
         if(this.logoutBtn) {
             this.logoutBtn.addEventListener('click', () => this.logout());
@@ -143,18 +141,25 @@ const Auth = {
     },
 
     updateAuthUI() {
+        const apikeyGroup = document.getElementById('auth-apikey-group');
+        const apikeyInput = document.getElementById('auth-signup-apikey');
+
         if (this.isSignup) {
             this.authTitle.innerText = "Create Account";
             this.authSubtitle.innerText = "Join PlacementHub today";
             this.authSubmitBtn.innerText = "Sign Up";
             this.authSwitchText.innerText = "Already have an account?";
             this.authSwitchBtn.innerText = "Login";
+            if(apikeyGroup) apikeyGroup.style.display = 'block';
+            if(apikeyInput) apikeyInput.required = true;
         } else {
             this.authTitle.innerText = "Welcome Back";
             this.authSubtitle.innerText = "Sign in to continue";
             this.authSubmitBtn.innerText = "Login";
             this.authSwitchText.innerText = "Don't have an account?";
             this.authSwitchBtn.innerText = "Sign Up";
+            if(apikeyGroup) apikeyGroup.style.display = 'none';
+            if(apikeyInput) apikeyInput.required = false;
         }
     },
 
@@ -162,6 +167,7 @@ const Auth = {
         e.preventDefault();
         const userInp = document.getElementById('auth-username').value.trim().toLowerCase();
         const passInp = document.getElementById('auth-password').value.trim();
+        const apikeyInp = document.getElementById('auth-signup-apikey')?.value.trim();
 
         // Convert username to a dummy email for Supabase Auth if it's not already an email
         const safeUser = userInp.replace(/[^a-z0-9]/g, '');
@@ -190,6 +196,10 @@ const Auth = {
                 if (!data.session) {
                     alert("Sign up successful! However, your session is null. You MUST disable 'Confirm email' in your Supabase Auth Settings to log in automatically.");
                     return;
+                }
+                
+                if (apikeyInp) {
+                    localStorage.setItem('gemini_api_key', apikeyInp);
                 }
                 
                 this.loginSuccess(userInp);
