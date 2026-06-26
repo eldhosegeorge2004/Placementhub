@@ -435,6 +435,14 @@ export const InterviewModule = {
         const chat = document.querySelector('.interview-chat');
         const isAI = sender === 'ai';
 
+        // Escape HTML to prevent <thinking> or <error> tags from disappearing
+        const escapedText = text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
         const html = `
             <div class="msg-card ${sender}" style="
                 background: ${isAI ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255, 255, 255, 0.05)'};
@@ -445,11 +453,13 @@ export const InterviewModule = {
                 align-self: ${isAI ? 'flex-start' : 'flex-end'};
                 border-${isAI ? 'bottom-left' : 'bottom-right'}-radius: 2px;
                 animation: fadeIn 0.3s ease;
+                white-space: pre-wrap;
+                word-wrap: break-word;
             ">
                 <strong style="display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: ${isAI ? 'var(--primary)' : 'var(--text-dim)'};">
                     ${isAI ? 'Recruiter' : 'You'}
                 </strong>
-                ${text}
+                ${escapedText}
             </div>
         `;
 
