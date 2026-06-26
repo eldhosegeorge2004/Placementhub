@@ -55,9 +55,9 @@ export const ResumeModule = {
 
     render: function(container) {
         container.innerHTML = `
-            <div class="resume-builder-container" style="display: flex; gap: 20px; height: calc(100vh - 120px);">
+            <div class="resume-builder-container">
                 <!-- Editor Sidebar -->
-                <div class="resume-editor" style="width: 350px; background: #1e293b; padding: 20px; border-radius: 12px; overflow-y: auto; color: white;">
+                <div class="resume-editor">
                     <h2 style="margin-bottom: 20px; color: white;">Edit Content</h2>
                     
                     <div class="form-group" style="margin-bottom: 15px;">
@@ -120,7 +120,7 @@ export const ResumeModule = {
                 </div>
                 
                 <!-- Preview Area -->
-                <div class="resume-preview-area" style="flex: 1; background: #cbd5e1; border-radius: 12px; overflow-y: auto; padding: 20px; display: flex; justify-content: center; position: relative;">
+                <div class="resume-preview-area">
                     <div id="resume-paper" class="resume-paper ${this.data.currentTemplate}">
                         <!-- Content injected here -->
                     </div>
