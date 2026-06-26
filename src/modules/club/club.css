@@ -197,11 +197,30 @@
     font-size: 0.9rem;
     overflow-y: auto;
 }
+/* Language Tabs */
+.language-tabs {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Stacks on small screens */
+}
+
 @media (max-width: 900px) {
     .playground-grid { grid-template-columns: 1fr; height: auto; gap: 1rem; }
     .editor-section, .output-section { height: 400px; }
 }
+
 @media (max-width: 480px) {
     .club-container { padding: 1rem; }
+    .timeline {
+        margin-left: 1.5rem; /* Push timeline right so the blue dot doesn't overflow the screen */
+    }
     .timeline-card { padding: 1.5rem; }
+    .timeline-item::before {
+        left: -2.6rem; /* Keep the same offset relative to timeline */
+    }
+    .language-tabs {
+        justify-content: center; /* Center the stacked buttons */
+    }
 }

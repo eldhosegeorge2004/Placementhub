@@ -169,7 +169,7 @@ export const ClubModule = {
 
     getTimelineHTML: () => {
         const langs = [...new Set(ClubModule.problems.map(p => p.language))];
-        let tabsHtml = '<div class="language-tabs" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px;">';
+        let tabsHtml = '<div class="language-tabs">';
         langs.forEach(lang => {
             tabsHtml += '<button class="btn-sm ' + (ClubModule.selectedLanguage === lang ? 'btn-primary' : 'btn-glass') + '" onclick="window.ClubModule.setLanguage(\'' + lang + '\')">' + lang + '</button>';
         });
