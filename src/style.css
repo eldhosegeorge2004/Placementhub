@@ -179,6 +179,7 @@ nav {
     gap: 0.8rem;
     /* More space between items */
     flex: 1;
+    min-height: 0; /* Critical for flex item scrolling */
     overflow-y: auto;
     /* Scroll if window is short */
     scrollbar-width: none;
