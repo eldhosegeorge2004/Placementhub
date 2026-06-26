@@ -453,13 +453,12 @@ export const InterviewModule = {
                 align-self: ${isAI ? 'flex-start' : 'flex-end'};
                 border-${isAI ? 'bottom-left' : 'bottom-right'}-radius: 2px;
                 animation: fadeIn 0.3s ease;
-                white-space: pre-wrap;
                 word-wrap: break-word;
             ">
                 <strong style="display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: ${isAI ? 'var(--primary)' : 'var(--text-dim)'};">
                     ${isAI ? 'Recruiter' : 'You'}
                 </strong>
-                ${escapedText}
+                <div style="white-space: pre-wrap;">${escapedText}</div>
             </div>
         `;
 
