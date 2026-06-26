@@ -458,7 +458,7 @@ export const InterviewModule = {
                 <strong style="display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: ${isAI ? 'var(--primary)' : 'var(--text-dim)'};">
                     ${isAI ? 'Recruiter' : 'You'}
                 </strong>
-                <div style="white-space: pre-wrap;">${escapedText}</div>
+                <div style="white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere;">${escapedText}</div>
             </div>
         `;
 
