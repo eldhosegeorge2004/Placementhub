@@ -173,7 +173,18 @@ const Auth = {
                     email: email,
                     password: passInp,
                 });
-                if (error) throw error;
+                
+                if (error) {
+                    if (error.message.toLowerCase().includes('already registered') || error.message.toLowerCase().includes('already exists')) {
+                        throw new Error("This Login ID already exists. Please switch to Login instead.");
+                    }
+                    throw error;
+                }
+
+                // Supabase anti-enumeration: returns empty identities if user already exists
+                if (data?.user?.identities && data.user.identities.length === 0) {
+                    throw new Error("This Login ID already exists. Please switch to Login instead.");
+                }
                 
                 // If email confirmations are enabled in Supabase, session will be null
                 if (!data.session) {
