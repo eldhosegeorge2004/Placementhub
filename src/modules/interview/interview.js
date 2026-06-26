@@ -373,10 +373,10 @@ export const InterviewModule = {
                 align-self: flex-start;
                 border-bottom-left-radius: 2px;
                 animation: fadeIn 0.3s ease;
-                display: flex;
-                align-items: center;
-                gap: 8px;
                 margin-bottom: 1rem;
+                word-break: break-word;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             ">
                 <style>
                     @keyframes typingDot {
@@ -384,10 +384,10 @@ export const InterviewModule = {
                         50% { transform: translateY(-4px); opacity: 1; }
                     }
                 </style>
-                <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both;"></span>
-                <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.2s;"></span>
-                <span style="display: block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.4s;"></span>
-                <span style="color: #60a5fa; font-size: 0.9rem; margin-left: 8px; font-weight: 500;">AI is analyzing...</span>
+                <span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both; margin-right: 4px;"></span>
+                <span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.2s; margin-right: 4px;"></span>
+                <span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: typingDot 1.4s infinite ease-in-out both 0.4s; margin-right: 8px;"></span>
+                <span style="color: #60a5fa; font-size: 0.9rem; font-weight: 500;">AI is analyzing...</span>
             </div>
         `;
         chat.insertAdjacentHTML('beforeend', loadingHtml);
