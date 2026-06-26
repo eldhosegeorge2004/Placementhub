@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const QuizModule = {
     get apiKey() { return import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('gemini_api_key'); }, set apiKey(val) {},
+    forceShowApiKey: false,
     questions: [],
     currentQuestionIndex: 0,
     score: 0,
@@ -14,7 +15,7 @@ export const QuizModule = {
                     <p>Test your skills with dynamically generated questions powered by Gemini AI.</p>
                 </header>
                 
-                ${!QuizModule.apiKey ? QuizModule.renderApiKeyInput() : QuizModule.renderSetup()}
+                ${(!QuizModule.apiKey || QuizModule.forceShowApiKey) ? QuizModule.renderApiKeyInput() : QuizModule.renderSetup()}
             </div>
         `;
 
@@ -31,6 +32,7 @@ export const QuizModule = {
                 </p>
                 <input type="password" id="api-key-input" class="api-input" placeholder="Paste API Key here...">
                 <button class="btn-primary" id="save-api-key" style="width: 100%; padding: 1rem;">Verify & Save Key</button>
+                ${(QuizModule.apiKey && QuizModule.forceShowApiKey) ? '<button class="btn-glass" id="cancel-api-key" style="width: 100%; padding: 1rem; margin-top: 0.5rem;">Cancel / Go Back</button>' : ''}
                 <p style="margin-top: 1.5rem; font-size: 0.85rem;">
                     <a href="https://makersuite.google.com/app/apikey" target="_blank" style="color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent);">Get a free key from Google AI Studio</a>
                 </p>
@@ -83,10 +85,17 @@ export const QuizModule = {
                 const input = document.getElementById('api-key-input');
                 if (input.value) {
                     localStorage.setItem('gemini_api_key', input.value.trim());
-                    QuizModule.apiKey = input.value.trim();
+                    QuizModule.forceShowApiKey = false;
                     QuizModule.render(document.querySelector('#module-container'));
                 }
             });
+            const cancelBtn = document.getElementById('cancel-api-key');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', () => {
+                    QuizModule.forceShowApiKey = false;
+                    QuizModule.render(document.querySelector('#module-container'));
+                });
+            }
             return;
         }
 
@@ -106,8 +115,7 @@ export const QuizModule = {
         const changeKeyBtn = document.getElementById('change-key-btn');
         if (changeKeyBtn) {
             changeKeyBtn.addEventListener('click', () => {
-                localStorage.removeItem('gemini_api_key');
-                QuizModule.apiKey = '';
+                QuizModule.forceShowApiKey = true;
                 QuizModule.render(document.querySelector('#module-container'));
             });
         }
