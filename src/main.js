@@ -253,11 +253,13 @@ const Auth = {
     },
 
     async checkSession() {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
-            this.currentUser = session.user.email;
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (user && !error) {
+            this.currentUser = user.email;
             this.checkApiKey();
         } else {
+            // Session is invalid or user was deleted from the database
+            await supabase.auth.signOut();
             this.authOverlay.style.display = 'flex';
         }
     }
