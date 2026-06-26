@@ -52,7 +52,7 @@ body {
     background: var(--bg-deep);
     color: var(--text-main);
     overflow: hidden;
-    height: 100vh;
+    height: 100dvh;
 }
 
 /* --- 3D Canvas (Subtle Background) --- */
@@ -71,7 +71,7 @@ body {
     position: relative;
     z-index: 10;
     display: flex;
-    height: 100vh;
+    height: 100dvh;
     background: transparent;
     /* Remove the purple radial gradients */
 }
@@ -92,7 +92,7 @@ body {
     /* Floating Effect */
     margin: 1.5rem;
     /* Increased margin for better float */
-    height: calc(100vh - 3rem);
+    height: calc(100dvh - 3rem);
     /* Adjusted for margin */
     border-radius: 28px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
@@ -107,6 +107,7 @@ body {
     /* Reduced slightly to bring nav up */
     padding-left: 0.5rem;
     /* Align with nav items */
+    flex-shrink: 0; /* Ensure logo never shrinks */
 }
 
 .logo-icon {
@@ -267,6 +268,7 @@ nav {
     margin-top: auto;
     /* Push to bottom firmly */
     border-top: 1px solid var(--glass-border);
+    flex-shrink: 0; /* Ensure footer never shrinks */
 }
 
 .user-profile {
@@ -632,7 +634,7 @@ h3 {
         left: -320px;
         top: 0;
         margin: 0;
-        height: 100vh;
+        height: 100dvh;
         border-radius: 0;
         z-index: 100;
         transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
