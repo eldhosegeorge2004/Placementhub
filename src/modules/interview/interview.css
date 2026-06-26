@@ -106,8 +106,8 @@
 /* Input Area */
 .input-controls {
     display: flex;
-    gap: 0.8rem;
-    align-items: flex-end;
+    gap: 1rem;
+    align-items: center;
     position: relative;
     width: 100%;
 }
@@ -136,11 +136,9 @@
 
 /* Mic Button */
 .mic-btn {
-    position: absolute;
-    right: 10px;
-    bottom: 15px;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -246,9 +244,13 @@
     .interview-workspace { grid-template-columns: 1fr; }
     .interview-avatar-area { height: 250px; width: 250px; }
     .interview-chat { height: 350px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
+    .input-controls { flex-direction: column; align-items: stretch; }
+    .mic-btn { width: 100%; border-radius: 12px; height: 50px; }
+    #send-response-btn { width: 100%; }
+    .end-session-container { flex-direction: column; gap: 1rem; justify-content: center !important; }
+    .end-session-container .btn-glass { width: 100%; text-align: center; justify-content: center; }
 }
 @media (max-width: 480px) {
     .interview-avatar-area { height: 200px; width: 200px; }
     .interview-chat { height: 300px; padding: 1rem; overflow-y: auto !important; -webkit-overflow-scrolling: touch; }
-    .input-controls { flex-wrap: nowrap; }
 }
