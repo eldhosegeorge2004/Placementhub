@@ -6,21 +6,6 @@ The platform leverages the **Google Gemini API** to provide personalized mock in
 
 ---
 
-## 📸 Screenshots
-
-*(Take screenshots of your application and place them in a `screenshots/` folder in this repository, then replace these placeholder paths)*
-
-<div align="center">
-  <img src="screenshots/dashboard.png" alt="Dashboard View" width="45%">
-  <img src="screenshots/interview.png" alt="Mock Interview Module" width="45%">
-</div>
-<div align="center">
-  <img src="screenshots/roadmap.png" alt="AI Success Roadmap" width="45%">
-  <img src="screenshots/quiz.png" alt="Dynamic Quizzes" width="45%">
-</div>
-
----
-
 ## ✨ Features
 
 ### 🤖 4 Powerful AI Modules
