@@ -251,7 +251,7 @@ const Auth = {
         
         // Extract original username if it's our dummy email
         let displayUser = this.currentUser || 'Guest';
-        if (displayUser.endsWith('@placementhub.local')) {
+        if (displayUser.endsWith('@placementhub.com')) {
             displayUser = displayUser.split('@')[0];
         }
 
