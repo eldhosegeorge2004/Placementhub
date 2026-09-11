@@ -166,51 +166,15 @@ const Auth = {
     async handleAuth(e) {
         e.preventDefault();
         const userInp = document.getElementById('auth-username').value.trim().toLowerCase();
-        const passInp = document.getElementById('auth-password').value.trim();
         const apikeyInp = document.getElementById('auth-signup-apikey')?.value.trim();
 
-        // Convert username to a dummy email for Supabase Auth if it's not already an email
-        const safeUser = userInp.replace(/[^a-z0-9]/g, '');
-        const email = userInp.includes('@') ? userInp : `${safeUser}@placementhub.com`;
-
+        // MOCK AUTHENTICATION - Bypass Supabase entirely
         try {
-            if (this.isSignup) {
-                const { data, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: passInp,
-                });
-                
-                if (error) {
-                    if (error.message.toLowerCase().includes('already registered') || error.message.toLowerCase().includes('already exists')) {
-                        throw new Error("This Login ID already exists. Please switch to Login instead.");
-                    }
-                    throw error;
-                }
-
-                // Supabase anti-enumeration: returns empty identities if user already exists
-                if (data?.user?.identities && data.user.identities.length === 0) {
-                    throw new Error("This Login ID already exists. Please switch to Login instead.");
-                }
-                
-                // If email confirmations are enabled in Supabase, session will be null
-                if (!data.session) {
-                    alert("Sign up successful! However, your session is null. You MUST disable 'Confirm email' in your Supabase Auth Settings to log in automatically.");
-                    return;
-                }
-                
-                if (apikeyInp) {
-                    localStorage.setItem('gemini_api_key', apikeyInp);
-                }
-                
-                this.loginSuccess(userInp);
-            } else {
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: passInp,
-                });
-                if (error) throw error;
-                this.loginSuccess(userInp);
+            if (this.isSignup && apikeyInp) {
+                localStorage.setItem('gemini_api_key', apikeyInp);
             }
+            // Always succeed
+            this.loginSuccess(userInp);
         } catch (error) {
             alert(`Authentication Error: ${error.message}`);
         }
@@ -266,23 +230,14 @@ const Auth = {
     },
 
     async logout() {
-        await supabase.auth.signOut();
         this.currentUser = null;
-        
         // Perform a hard reload to securely reset all SPA states and return to the intro screen
         window.location.reload();
     },
 
     async checkSession() {
-        const { data: { user }, error } = await supabase.auth.getUser();
-        if (user && !error) {
-            this.currentUser = user.email;
-            this.checkApiKey();
-        } else {
-            // Session is invalid or user was deleted from the database
-            await supabase.auth.signOut();
-            this.authOverlay.style.display = 'flex';
-        }
+        // MOCK SESSION - Always show login screen since we aren't using a real database
+        this.authOverlay.style.display = 'flex';
     }
 };
 
