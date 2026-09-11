@@ -417,7 +417,7 @@ export const ClubModule = {
 
         try {
             const genAI = new GoogleGenerativeAI(ClubModule.apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
             const prompt = `You are a helpful coding mentor. 
             Analyze this JavaScript code and provide a brief, helpful hint or explanation. 

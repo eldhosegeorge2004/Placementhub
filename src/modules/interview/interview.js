@@ -318,7 +318,7 @@ export const InterviewModule = {
 
         try {
             const genAI = new GoogleGenerativeAI(InterviewModule.apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
             const prompt = `Act as a senior friendly recruiter at ${company}. 
             You are interviewing me for a ${role} position. 
@@ -400,7 +400,7 @@ export const InterviewModule = {
 
         try {
             const genAI = new GoogleGenerativeAI(InterviewModule.apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
             const history = InterviewModule.history.map(x => x);
             history.push({ role: 'user', parts: [{ text }] });
